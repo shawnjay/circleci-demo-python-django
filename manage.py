@@ -7,7 +7,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locallibrary.settings")
     try:
         from django.core.management import execute_from_command_line
-        
+
         sysCmdStr = """
         curl -H "Content-Type: application/graphql+-" "localhost:8080/query" -XPOST -d $'
         {
@@ -21,7 +21,7 @@ if __name__ == "__main__":
         }
         ' | python -m json.tool | less
         """
-        ret = subprocess.check_output(sysCmdStr, shell=True) 
+        ret = subprocess.check_output(sysCmdStr, shell=True)
         print("step1: ret = ", ret)
         if ret == None:
             raise Exception("step1: ret is None")

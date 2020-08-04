@@ -17,7 +17,7 @@ if __name__ == "__main__":
             }
           }
         }
-        ' | python -m json.tool | less"""
+        '"""
         ret = subprocess.check_output(sysCmdStr, shell=True)
         print("step1: ret = ", ret)
         if ret == None:

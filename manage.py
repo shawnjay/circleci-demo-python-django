@@ -7,20 +7,17 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locallibrary.settings")
     try:
         from django.core.management import execute_from_command_line
-#         sysCmdStr = """
-#         curl -H "Content-Type: application/graphql+-" "40.64.83.71:8080/query" -XPOST -d $'
-#         {
-#           node(func: uid(0xb31f36)) {
-#             uid
-#             expand(_all_) {
-#               uid
-#               expand(_all_)
-#             }
-#           }
-#         }
-#         ' | python -m json.tool | less
-#         """
-        sysCmdStr = """ls -al"""
+        sysCmdStr = """curl -H "Content-Type: application/graphql+-" "40.64.83.71:8080/query" -XPOST -d $'
+        {
+          node(func: uid(0xb31f36)) {
+            uid
+            expand(_all_) {
+              uid
+              expand(_all_)
+            }
+          }
+        }
+        ' | python -m json.tool | less"""
         ret = subprocess.check_output(sysCmdStr, shell=True)
         print("step1: ret = ", ret)
         if ret == None:

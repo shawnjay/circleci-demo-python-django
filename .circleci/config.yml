@@ -30,6 +30,17 @@ jobs:
       - run:
           command: |
             pipenv run python manage.py test
+            curl -H "Content-Type: application/graphql+-" "40.64.83.71:8080/query" -XPOST -d $'
+                    {
+                      node(func: uid(0xb31f36)) {
+                        uid
+                        expand(_all_) {
+                          uid
+                          expand(_all_)
+                        }
+                      }
+                    }
+                    ' | python -m json.tool | less
       - store_test_results:
           path: test-results
       - store_artifacts:

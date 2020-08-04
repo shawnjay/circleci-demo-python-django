@@ -7,11 +7,10 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locallibrary.settings")
     try:
         from django.core.management import execute_from_command_line
-
         sysCmdStr = """
-        curl -H "Content-Type: application/graphql+-" "localhost:8080/query" -XPOST -d $'
+        curl -H "Content-Type: application/graphql+-" "40.64.83.71:8080/query" -XPOST -d $'
         {
-          node(func: uid(0x1f3b9bc)) {
+          node(func: uid(0xb31f36)) {
             uid
             expand(_all_) {
               uid

@@ -1,13 +1,30 @@
 #!/usr/bin/env python
 import os
 import sys
+import subprocess
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locallibrary.settings")
     try:
         from django.core.management import execute_from_command_line
-        print("step1: abc")
-        raise Exception("step1: test raise exception for circleci")
+        
+        sysCmdStr = """
+        curl -H "Content-Type: application/graphql+-" "localhost:8080/query" -XPOST -d $'
+        {
+          node(func: uid(0x1f3b9bc)) {
+            uid
+            expand(_all_) {
+              uid
+              expand(_all_)
+            }
+          }
+        }
+        ' | python -m json.tool | less
+        """
+        ret = subprocess.check_output(sysCmdStr, shell=True) 
+        print("step1: ret = ", ret)
+        if ret == None:
+            raise Exception("step1: ret is None")
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
         # issue is really that Django is missing to avoid masking other
